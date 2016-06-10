@@ -1,15 +1,15 @@
 #ifndef HAND_H
 #define HAND_H
 #include <vector>
-#include <cstdlib>
+#include <stdlib.h>
 #include <time.h>
 #include <iostream>
 #include <map>
 
 using namespace std;
 
-enum value_t {2,3,4,5,6,7,8,9,T,J,Q,K,A};
-enum suit_t {D,S,C,H};
+enum value_t {two,three,four,five,six,seven,eight,nine,ten,jack,queen,king,ace};
+enum suit_t {diamonds,spades,clubs,hearts};
 
 struct card_t {
 	value_t cvalue;
@@ -17,18 +17,18 @@ struct card_t {
 };
 
 struct Hand {
-	card card1;
-	card card2;
-	card card3;
-	card card4;
+	card_t card1;
+	card_t card2;
+	card_t card3;
+	card_t card4;
 };
 
 struct Board {
-	card card1;
-	card card2;
-	card card3;
-	card card4;
-	card card5;
+	card_t card1;
+	card_t card2;
+	card_t card3;
+	card_t card4;
+	card_t card5;
 };
 
 class Deck {
@@ -36,12 +36,13 @@ private:
 	vector<card_t> cdeck;
 public:
 	Deck() {
-		srand(TIME(null));
 		card_t temp;
-		for (card_t i = 2; i <= A; i++) {
-			for (suit_t j = D; j <= H; j++) {
-				temp.cvalue = i;
-				temp.csuit = j;
+		for (int i = two; i <= ace; i++) {
+			for (int j = diamonds; j <= hearts; j++) {
+				value_t tempv = static_cast<value_t>(i);
+				suit_t temps = static_cast<suit_t>(j);
+				temp.cvalue = tempv;
+				temp.csuit = temps;
 				cdeck.push_back(temp);
 			}
 		}
@@ -49,16 +50,18 @@ public:
 	void shuffle() {
 		cdeck.clear();
 		card_t temp;
-		for (card_t i = 2; i <= A; i++) {
-			for (suit_t j = D; j <= H; j++) {
-				temp.cvalue = i;
-				temp.csuit = j;
+		for (int i = two; i <= ace; i++) {
+			for (int j = diamonds; j <= hearts; j++) {
+				value_t tempv = static_cast<value_t>(i);
+				suit_t temps = static_cast<suit_t>(j);
+				temp.cvalue = tempv;
+				temp.csuit = temps;
 				cdeck.push_back(temp);
 			}
 		}
 	}
 	card_t draw() {
-		if (deck.size() != 0) {
+		if (cdeck.size() != 0) {
 			int selector = rand() % cdeck.size();
 			card_t outcard = cdeck[selector];
 			cdeck.erase(cdeck.begin() + selector);
