@@ -1,10 +1,13 @@
 #ifndef HAND_H
 #define HAND_H
+
 #include <vector>
 #include <stdlib.h>
 #include <time.h>
 #include <iostream>
 #include <map>
+#include <string>
+#include <cctype>
 
 using namespace std;
 
