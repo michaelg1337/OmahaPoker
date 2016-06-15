@@ -14,6 +14,22 @@ using namespace std;
 enum value_t {two,three,four,five,six,seven,eight,nine,ten,jack,queen,king,ace};
 enum suit_t {diamonds,spades,clubs,hearts};
 
+value_t valuefor(string symbol) {
+	return svalues.find(symbol)->second;
+}
+
+suit_t suitfor(string symbol) {
+	return ssuits.find(symbol)->second;
+}
+
+string stringfor(suit_t symbol) {
+	return esuits.find(symbol)->second;
+}
+
+string stringfor(value_t symbol) {
+	return evalues.find(symbol)->second;
+}
+
 struct card_t {
 	value_t cvalue;
 	suit_t csuit;

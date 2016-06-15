@@ -50,22 +50,6 @@ void initSymbols() {
 	esuits[hearts] = "hearts";
 }
 
-value_t valuefor(string symbol) {
-	return svalues.find(symbol)->second;
-}
-
-suit_t suitfor(string symbol) {
-	return ssuits.find(symbol)->second;
-}
-
-string stringfor(suit_t symbol) {
-	return esuits.find(symbol)->second;
-}
-
-string stringfor(value_t symbol) {
-	return evalues.find(symbol)->second;
-}
-
 int main() {
 	initSymbols();
 	Deck MainDeck;

@@ -9,28 +9,82 @@ int handAnalyser(Hand inHand1, Hand inHand2, Board board) {
 	return 0;
 }
 
-bool checkFlush(vector<card_t> inlist) {
-	if (inlist[0].csuit == inlist[1].csuit && inlist[1].csuit == inlist[2].csuit && inlist[2].csuit == inlist[3].csuit && inlist[3] == inlist[4].csuit)
-		return true;
-	return false;
-}
-
-bool checkStraight(int inlist[]) {
-	int lowest = -1, highest = 0;
-	for (int i = 0; i < 13; i++) {
-		if (inlist[i] > 1)
-			return false;
-		if (inlist[i] == 1 && lowest == -1)
-			lowest = i;
-		if (inlist[i] == 1)
-			highest == i;
+class Analyser {
+private:
+	int histogram[13];
+	int suitgram[5];
+public:
+	int highest() {
+		for (int i = 12; i >= 0; i--) {
+			if (histogram[i] != 0)
+				return i;
+		}
+		return 0;
 	}
-	if (highest - lowest == 4)
-		return true;
-	if (inlist[0] == inlist[1] == inlist[2] == inlist[3] == inlist[12])
-		return true;
-	return false;
-}
+	int secondhighest() {
+		for (int i = highest() - 1; i >= 0; i--) {
+			if (histogram[i] != 0)
+				return i;
+		}
+		return 0;
+	}
+	int thirdhighest() {
+		for (int i = secondhighest() - 1; i >= 0; i--) {
+			if (histogram[i] != 0)
+				return i;
+		}
+		return 0;
+	}
+	int fourthhighest() {
+		for (int i = thirdhighest() - 1; i >= 0; i--) {
+			if (histogram[i] != 0)
+				return i;
+		}
+		return 0;
+	}
+	int fifthhighest() {
+		for (int i = fourthhighest() - 1; i >= 0; i--) {
+			if (histogram[i] != 0)
+				return i;
+		}
+		return 0;
+	}
+	int most() {
+
+	}
+	int secondmost();
+	int thirdmost();
+	bool sraightflush();
+	bool fourkind();
+	bool fullhouse();
+	bool flush() {
+		if (suitgram[0]==4 or suitgram[1]==4 or suitgram[2]==4 or suitgram[3]==4)
+			return true;
+		return false;
+	}
+	bool straight();
+	bool threekind();
+	bool twopair();
+	bool pair();
+	Analyser(card_t c1, card_t c2, card_t c3, card_t c4, card_t c5) {
+		for (int i = 0; i < 13; i++) {
+			histogram[i] = 0;
+		}
+		for (int i = 0; i < 4; i++) {
+			suitgram[i] = 0;
+		}
+		suitgram[static_cast<int>(c1.csuit)]++;
+		histogram[static_cast<int>(c1.cvalue)]++;
+		suitgram[static_cast<int>(c2.csuit)]++;
+		histogram[static_cast<int>(c2.cvalue)]++;
+		suitgram[static_cast<int>(c3.csuit)]++;
+		histogram[static_cast<int>(c3.cvalue)]++;
+		suitgram[static_cast<int>(c4.csuit)]++;
+		histogram[static_cast<int>(c4.cvalue)]++;
+		suitgram[static_cast<int>(c5.csuit)]++;
+		histogram[static_cast<int>(c5.cvalue)]++;
+	}
+};
 
 int better(card_t p1c1, card_t p1c2, card_t p1c3, card_t p1c4, card_t p1c5, card_t p2c1, card_t p2c2, card_t p2c3, card_t p2c4, card_t p2c5) {
 	int analyser1[13] = { 0,0,0,0,0,0,0,0,0,0,0,0,0 };
